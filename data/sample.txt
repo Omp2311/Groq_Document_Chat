@@ -1,0 +1,7 @@
+Retrieval-Augmented Generation (RAG) is a technique that combines a retriever with a large language model. Instead of relying only on what the model memorised during training, a RAG system first searches an external knowledge base for passages relevant to the user's question, and then gives those passages to the model as context.
+
+A typical RAG pipeline has two stages. In the indexing stage, documents are loaded, split into smaller chunks, converted into vector embeddings and stored in a vector database such as FAISS or ChromaDB. In the query stage, the user's question is embedded, the most similar chunks are retrieved, and a prompt containing the question and the retrieved context is sent to the language model.
+
+Chunk size and chunk overlap control how documents are split. Small chunks give precise retrieval but may lose surrounding context, while large chunks keep more context but dilute relevance. Overlap repeats a little text between neighbouring chunks so that sentences cut at a boundary are not lost.
+
+Groq provides very low-latency inference for open models through its LPU hardware, which makes it well suited as the generation step of a RAG application.
