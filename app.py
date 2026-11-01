@@ -78,6 +78,12 @@ st.session_state.setdefault("chunk_count", 0)
 st.title("Chat with your documents")
 
 if not os.getenv("GROQ_API_KEY"):
+    try:  # Streamlit Cloud: key comes from Settings -> Secrets, not .env
+        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+    except (KeyError, FileNotFoundError):
+        pass
+
+if not os.getenv("GROQ_API_KEY"):
     st.error("GROQ_API_KEY is not set. Add it to a .env file and restart the app.")
     st.stop()
 
